@@ -1,3 +1,4 @@
+#importing all the built-in functions
 from __builtins__ import *
 
 #get the width and height of the farm
@@ -58,7 +59,6 @@ def plant_Cactus(x,y):
 				till()
 			plant(Entities.Cactus)
 
-
 #Check if number is even
 def is_even(n):
 	return n % 2 == 0
@@ -116,8 +116,6 @@ def traverse(width, height):
 				#Fertilizing the crops
 				fertilize_Crops()
 		move(East)
-
-
 
 while True:
 	height, width = farmSize()
