@@ -39,8 +39,8 @@ def plant_Carrot(x,y):
 
 def plant_Pumpkin(x, y):
 	#plant pumpkin 3x3 area at top right of farm
-	if y > (height - 5):
-					if x > (width - 5):						
+	if y > (height - 6):
+					if x > (width - 6):						
 						if get_ground_type() != Grounds.Soil:
 							till()
 						plant(Entities.Pumpkin)
@@ -53,11 +53,101 @@ def plant_Sunflower(x,y):
 				plant(Entities.Sunflower)
 
 def plant_Cactus(x,y):
-	if x < (width - 4) and y > (height - 4):
+	if x <= (2) and y > (height - 4):
 		if get_entity_type() != Entities.Pumpkin and get_entity_type() != Entities.Sunflower:
 			if get_ground_type() != Grounds.Soil:
 				till()
 			plant(Entities.Cactus)
+	if x >= 4 and x <= 7 and y > (height - 4):
+			if get_entity_type() != Entities.Pumpkin and get_entity_type() != Entities.Sunflower:
+				if get_ground_type() != Grounds.Soil:
+					till()
+				plant(Entities.Cactus)
+
+#sorts cactus by measuring and swapping 
+def sort_CactusA(x,y):
+	
+	#move drone to starting position
+	move_to_start(x,y)
+
+	#move drone to first cactus row
+	while y != height -1:
+		move(North)
+		y = get_pos_y()
+
+	#Sort cactie with larger to the north and east of smaller	
+	sort_Cactus_r()
+	move(South)
+	sort_Cactus_r()
+	move(South)
+	sort_Cactus_r()
+	move(North)
+	move(North)
+	sort_Cactus_c()
+	move(East)
+	sort_Cactus_c()
+	move(East)
+	sort_Cactus_c()
+
+#sorts cactus by measuring and swapping 
+def sort_CactusB(x,y):
+	
+	#move drone to starting position
+	move_to_start(x,y)
+
+	#move drone to first cactus row
+	while y != height -1:
+		move(North)
+		y = get_pos_y()
+	while x != 4:
+		move(East)
+		x = get_pos_x()
+
+	#Sort cactie with larger to the north and east of smaller	
+	sort_Cactus_r()
+	move(South)
+	sort_Cactus_r()
+	move(South)
+	sort_Cactus_r()
+	move(North)
+	move(North)
+	sort_Cactus_c()
+	move(East)
+	sort_Cactus_c()
+	move(East)
+	sort_Cactus_c()
+
+#sort cactus column
+def sort_Cactus_r():
+	sort_Cactus_e()
+	move(East)
+	sort_Cactus_e()
+	move(West)
+	sort_Cactus_e()
+
+#sort Cactus row
+def sort_Cactus_c():
+	sort_Cactus_s()
+	move(South)
+	sort_Cactus_s()
+	move(North)
+	sort_Cactus_s()
+
+#sort cactus to the east
+def sort_Cactus_e():
+	if get_entity_type() == Entities.Cactus:
+			a = measure()
+			b = measure(East)
+			if b < a and b != None: # type: ignore
+				swap(East)
+
+#sort Cactus to teh south
+def sort_Cactus_s():
+	if get_entity_type() == Entities.Cactus:
+			a = measure()
+			b = measure(South)
+			if b > a and b != None: # type: ignore
+				swap(South)
 
 #Check if number is even
 def is_even(n):
@@ -116,7 +206,22 @@ def traverse(width, height):
 				#Fertilizing the crops
 				fertilize_Crops()
 		move(East)
+	x, y = get_pos()
+	sort_CactusA(x,y)
+	sort_CactusB(x,y)
+
+#move drone to starting position
+def move_to_start(x,y):
+	while x != 0:
+		move(West)
+		x = get_pos_x()
+		
+	while y != 0:
+		move(South)
+		y = get_pos_y()
 
 while True:
+	x,y = get_pos()
+	move_to_start(x,y)
 	height, width = farmSize()
 	traverse(width, height)
