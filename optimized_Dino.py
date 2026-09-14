@@ -21,10 +21,10 @@ while True:
  
   # move vertically until we reach target_y
   while get_pos_y() != target_y:
-    if target_y > get_pos_y():
-        dinosaur_safe_move(North)
-    else:
-        dinosaur_safe_move(South)
+	if target_y > get_pos_y():
+		dinosaur_safe_move(North)
+	else:
+		dinosaur_safe_move(South)
  
   # after finishing the column, move east if there are more columns
   if x < n - 1:
