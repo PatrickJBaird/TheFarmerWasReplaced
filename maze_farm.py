@@ -1,11 +1,8 @@
 from go_to import *
 from maze_runner import *
 
-ws_left = num_items(Items.Weird_Substance)
-
-while ws_left  >= 12:
-	
+def maze_farm():
 	go_to(0,0)
 	plant(Entities.Bush)
-	use_item(Items.Weird_Substance,12)
+	use_item(Items.Weird_Substance,48)
 	run_maze()
