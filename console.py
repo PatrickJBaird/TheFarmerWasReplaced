@@ -1,3 +1,4 @@
 from go_to import *
+from cactus_farm import *
 
-change_hat(Hats.Straw_Hat)
+run_Cactus_Farm()
