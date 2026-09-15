@@ -2,7 +2,7 @@
 Repo for the game "TheFarmerWasReplaced"
 
 learning some basic python scripting using this game
-Also relarning git useage, only maintaining 1 branch
+Also relearning git useage, only maintaining 1 branch
 
 Feel free to reuse any code or make any suggestions for edits.
 
